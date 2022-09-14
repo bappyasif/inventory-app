@@ -1,0 +1,46 @@
+body {
+  padding: 50px;
+  font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.sidebar {
+  width: 20%;
+}
+
+
+.nav-link-anchor {
+  width: -webkit-fill-available;
+  font-size: xx-large;
+}
+
+.catalog-nav {
+  width: 49%;
+}
+
+.catalog-nav-link,
+.form-btn {
+  font-size: xx-large;
+}
+
+thead,
+.form-btn {
+  font-size: xx-large;
+}
+
+td,
+td .data-item {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+td .data-item {
+  width: -webkit-fill-available;
+}
+
+.form-row {
+  justify-content: center;
+}

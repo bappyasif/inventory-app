@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <div class="container-fluid bg-light">
+        <div class="row form-row">
+            <div class="col-sm-3">
+                <%- include("./partials/nav.ejs") %>
+            </div>
+            <div class="col-md-4 bg-secondary">
+                <h1 class="rounded bg-success text-white border border-primary mt-2 pt-2 pb-2 text-center"><%= title %></h1>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <label for="cover-photo">Cover Photo</label>
+                        <input type="file" name="cover_photo" id="cover-photo" value=<%= artist?.cover_img %> >
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input 
+                            class="form-control"
+                            type="text" id="first_name" name="first_name" placeholder="First Name"
+                            value=<%= artist?.first_name %>
+                        >
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input
+                            class="form-control" 
+                            type="text" id="last_name" name="last_name" placeholder="Last Name"
+                            value=<%= artist?.last_name %>
+                        >
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="d_o_b">Date Of Birth</label>
+                        <input 
+                            class="form-control" 
+                            type="date" id="d_o_b" name="d_o_b"
+                            value=<%= artist?.dob_iso %>
+                        >
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="d_o_d">Date Of Death</label>
+                        <input 
+                            class="form-control" 
+                            type="date" id="d_o_d" name="d_o_d"
+                            value=<%= artist?.dod_iso %>
+                        >
+                    </fieldset>
+                    <% if(update_flag) { %>
+                        <fieldset class="form-group">
+                            <label for="admin">Admin Code</label>
+                            <input class="form-control" type="text" id="admin" name="admin_code" />
+                        </fieldset>
+                    <% } %>
+                    <button class="btn btn -lg btn-block btn-success form-btn" type="submit">Submit</button>
+                </form>
+                <hr>
+                <hr>
+                <h2 class="rounded bg-warning text-dark border border-primary mt-2 pt-2 pb-2 text-center">List Of Errors If There's any: </h4>
+                <hr>
+                <hr>
+                <ul class="list-group list-group-flush">
+                    <% if(errors) { %>
+                        <% errors?.forEach(error => { %>
+                            <li class="alert alert-danger" role="alert"><%= error.msg %> </li>
+                        <% }) %>
+                    <% } else { %>
+                        <li class="list-group-item list-group-item-secondary">There are no Errors</li>
+                    <% } %>
+                </ul>
+                <hr>
+                <hr>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

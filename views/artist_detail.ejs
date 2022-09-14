@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                <%- include("./partials/nav.ejs") %>
+            </div>
+            <div class="col">
+                <table class="table table-dark table-hover">
+                    <caption>Artist Information Details</caption>
+                    <thead>
+                        <h1 class="rounded bg-success text-white border border-primary mt-2 pt-2 pb-2 text-center">Detail About Artist: <%= artist.full_name %> </h1>
+                    </thead>
+                    <tbody>
+                        <% if(artist.cover_img !== undefined) { %>
+                            <tr>
+                                <th scope="row">Artist Photo</th>
+                                <td class="bg-info" style="text-align: center;"><img style="height: 200px;" src=<%= artist.cover_photo %> alt="Cover Shot Of Artist"></td>
+                            </tr>
+                        <% } %>
+                        <tr>
+                            <th scope="row">Artist Name</th>
+                            <td class="bg-info"><%= artist.full_name %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Albums Count</th>
+                            <td class="bg-info"><%= artist_albums?.length %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Date Of Birth</th>
+                            <td class="bg-info"><%= artist.dob_format %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Date Of Death</th>
+                            <td class="bg-info"><%= artist.dod_format %></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <hr>
+                <h3 class="rounded bg-success text-white border border-primary text-center">Albums List: </h3>
+                <ul class="nav nav-pills nav-fill">
+                    <% if(artist_albums?.length) { %>
+                        <% artist_albums?.forEach(album => { %>
+                            <li class="text-primary nav-item border border-primary btn-lg m-2 bg-warning"><a class="nav-link text-secondary" href=<%= "/catalog/album/"+album.id %> ><%= album.album %></a></li>
+                        <% }) %>
+                    <% } else { %>
+                        <li class="text-danger">There are no albums found from this artist</li>
+                    <% } %>
+                </ul>
+                <hr>
+                <br>
+                <nav class="nav nav-pills row nav-fills">
+                    <a class="col nav-item btn btn-lg btn-info form-btn m-1" href=<%= artist.url+"/update" %>>Update</a>
+                    <a class="col nav-item btn btn-lg btn-danger form-btn m-1" href=<%= artist.url+"/delete" %>>Delete</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <div class="container-fluid">
+        <div class="row form-row">
+            <div class="col-sm-3">
+                <%- include("./partials/nav.ejs") %>
+            </div>
+            <div class="col-auto bg-secondary">
+                <h1 class="rounded bg-success text-white border border-primary mt-2 pt-2 pb-2 text-center"><%= title %></h1>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <fieldset class="form-group">
+                        <label for="avatar">Album Photo</label>
+                        <input type="file" name="avatar" id="avatar" value=<%= album?.img_file %>>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="name">Album Name</label>
+                        <input
+                            class="form-control"
+                            type="text" name="name" id="name" placeholder="Album Name Goes Here...." required="true"
+                            value='<%= album !== undefined ? album?.name : '' %>'
+                        >
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="artist">Artist Name</label>
+                        <select
+                            class="form-control" 
+                            name="artist" id="artist"
+                            placeholder="Select Artist"
+                            required="true"
+                        >
+                        <% artists.sort((a,b) => (a.first_name.toUpperCase() < b.first_name.toUpperCase()) ? -1 : (a.first_name.toUpperCase() > b.first_name.toUpperCase> b.first_name.toUpperCase()) ? 1 : 0) %> 
+                        <% artists?.forEach(artist => { %>
+                            <option 
+                                value=<%= artist._id %>
+                                <%= artist.selected ? "selected" : null %>
+                            ><%= artist.full_name %></option>
+                        <% }) %>
+                        </select>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="genre">Album Genre</label>
+                        <div>
+                            <% genres?.forEach(genre => { %>
+                                <div class="form-check-inline">
+                                    <input 
+                                        class="form-check-input"
+                                        type="checkbox" name="genre" 
+                                        id=<%= genre._id %>
+                                        value=<%= genre._id %>
+                                        <%= genre.checked !== undefined ? "checked" : null %> 
+                                    >
+                                    <label 
+                                        class="form-check-label"
+                                        for=<%= genre._id %>>
+                                        <%= genre.name %>
+                                    </label>
+                                </div>
+                            <% }) %>
+                        </div>                        
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="r_date">Released Date</label>
+                        <input 
+                            class="form-control"
+                            type="date" name="r_date" id="r_date"
+                            value=<%= album?.form_date %>
+                        >
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="descr">Album Description</label>
+                        <textarea 
+                            style="text-align: left;"
+                            class="form-control"
+                            name="descr" id="descr" rows="2" placeholder="enter description"><%= album?.description %></textarea>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="price">Retail Price</label>
+                        <input 
+                            class="form-control"
+                            type="number" name="price" id="price"
+                            value=<%= album?.price %> 
+                        >
+                    </fieldset>
+                    <% if(update_flag) { %>
+                        <fieldset class="form-group">
+                            <label for="admin">Admin Code</label>
+                            <input class="form-control" type="text" id="admin" name="admin_code" />
+                        </fieldset>
+                    <% } %>
+                    <button class="btn btn -lg btn-block btn-success form-btn" type="submit">Submit</button>
+                </form>
+                <hr>
+                <hr>
+                <h2 class="rounded bg-warning text-dark border border-primary mt-2 pt-2 pb-2 text-center">List Of Errors If There's any: </h4>
+                <hr>
+                <hr>
+                <ul class="list-group list-group-flush">
+                    <% if(errors) { %>
+                        <% errors?.forEach(error => { %>
+                            <li class="alert alert-danger" role="alert"><%= error.msg %> </li>
+                        <% }) %>
+                    <% } else { %>
+                        <li class="list-group-item list-group-item-secondary">There are no Errors</li>
+                    <% } %>
+                </ul>
+                <hr>
+                <hr>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

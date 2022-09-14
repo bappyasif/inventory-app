@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <div class="container-fluid">
+        <div class="row form-row">
+            <div class="col-sm-3">
+                <%- include("./partials/nav.ejs") %>
+            </div>
+            <div class="col-sm-4 bg-secondary">
+                <h1 class="rounded bg-success text-white border border-primary mt-2 pt-2 pb-2 text-center"><%= title %></h1>
+                <hr>
+                <hr>
+                <h3 class="rounded bg-secondary text-white border border-primary mt-2 pt-2 pb-2 text-center">Are you sure you want to delete this track</h3>
+                <form action="" method="post">
+                    <fieldset class="form-group">
+                        <input class="form-control" type="hidden" name="trackid" id="trackid" required="true" value=<%= track._id %>>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="admin">Admin Code (* required )</label>
+                        <input class="form-control" type="text" id="admin" name="admin_code" />
+                    </fieldset>
+                    <button class="btn btn-lg btn-block bg-danger text-white form-btn" type="submit">Delete</button>
+                </form>
+                <br>
+                <br>
+                <% if(errors != null) { %>
+                    <h2 class="rounded bg-warning text-dark border border-primary mt-2 pt-2 pb-2 text-center">List Of Errors If There's any: </h4>
+                    <ul class="list-group list-group-flush">
+                        <% if(errors) { %>
+                            <% errors?.forEach(error => { %>
+                                <li class="alert alert-danger" role="alert"><%= error.msg %> </li>
+                            <% }) %>
+                        <% } else { %>
+                            <li class="list-group-item list-group-item-secondary">There are no Errors</li>
+                        <% } %>
+                    </ul>
+                <% } %>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>

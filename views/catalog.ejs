@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3">
+                    <%- include("./partials/nav.ejs") %>
+                </div>
+                <div class="col">
+                    <h1 class="rounded bg-success text-white border border-primary mt-2 pt-1 pb-1 text-center"><%= title %></h1>
+                    <ul class="nav nav-pills nav-fill">
+                        <li class="nav-item m-1 btn btn-lg bg-secondary list-group-item catalog-nav">
+                            <a class="nav-link text-white catalog-nav-link" href="/catalog/albums">Number of total Albums: <span class="text-white"><%= results.count_albums %></span></a>
+                        </li>
+                        <li class="nav-item m-1 btn btn-lg bg-secondary list-group-item catalog-nav">
+                            <a class="nav-link text-white catalog-nav-link" href="/catalog/artists">Number of total Artists: <span class="text-white"><%= results.count_artists %></span></a>
+                        </li>
+                        <li class="nav-item m-1 btn btn-lg bg-secondary list-group-item catalog-nav">
+                            <a class="nav-link text-white catalog-nav-link" href="/catalog/genres">Number of total Genres: <span class="text-white"><%= results.count_genres %></span></a>
+                        </li>
+                        <li class="nav-item m-1 btn btn-lg bg-secondary list-group-item catalog-nav">
+                            <a class="nav-link text-white catalog-nav-link" href="/catalog/tracks">Number of total Tracks: <span class="text-white"><%= results.count_tracks %></span></a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <hr>
+                    <h2 class="rounded bg-success text-white border border-primary text-center">Album counts from different Genres: </h2>
+                    <table class="table table-bordered table-primary">
+                        <thead class="text-center">
+                            <tr>
+                                <% for(let key in results.albums_genres) { %>
+                                    
+                                    <th class="bg-secondary" scope="col"><span class="text-white"><%= key %></span></th>
+                                    
+                                <% } %>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <% for(let key in results.albums_genres) { %>
+                                    
+                                    <td class="text-center"><span class="text-secondary"><%= results.albums_genres[key] %></td>
+                                    
+                                <% } %>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

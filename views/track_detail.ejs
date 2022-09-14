@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                <%- include("./partials/nav.ejs") %>
+            </div>
+            <div class="col">
+                <table class="table bordered table-hover table-dark">
+                    <caption><%= title %></caption>
+                    <thead>
+                        <h1 class="rounded bg-success text-white border border-primary mt-2 pt-2 pb-2 text-center"><%= title %></h1>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Track Name</th>
+                            <td class="bg-info text-center"><%= track.name %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="align-middle">Album Name</th>
+                            <td class="bg-info"><a class="text-white btn btn-lg nav-link data-item p-0" href=<%= "/catalog/album/"+track.album._id %>><%= track.album.name %></a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="align-middle">Genre Name</th>
+                            <td class="bg-info">
+                                <% track.genre?.forEach(item => { %>
+                                    <span><a class="text-white btn btn-lg nav-link data-item p-0" href=<%= "/catalog/genre/"+item.id.toString() %>><%= item.name %></a></span>
+                                <% }) %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <br>
+                <nav class="nav nav-pills row nav-fills">
+                    <a class="col nav-item btn btn-lg btn-info form-btn m-2" href=<%= track.url+"/update" %>>Update</a>
+                    <a class="col nav-item btn btn-lg btn-danger form-btn m-2" href=<%= track.url+"/delete" %>>Delete</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                <%- include("./partials/nav.ejs") %>
+            </div>
+            <div class="col">
+                <h1 class="rounded bg-secondary text-white border border-primary mt-2 pt-2 pb-2 text-center"><%= title %> </h1>
+                <table class="table table-borderd text-center table-hover table-dark">
+                    <caption>List of all artists</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="bg-info text-white">Artist Full Name</th>
+                            <th scope="col" class="bg-info text-white">Date Of Birth</th>
+                            <th scope="col" class="bg-info text-white">Date Of Death</th>
+                            <th scope="col" class="bg-info text-white">Albums Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% artists?.forEach(artist => { %>
+                            <tr>
+                                <td><a class="text-white btn btn-sm data-item" href=<%= artist.url %>><%= artist.full_name %></a></td>
+                                <td class="bg-secondary text-white align-middle"><%= artist.dob_format %></td>
+                                <td class="bg-secondary text-white align-middle"><%= artist.dod_format %></td>
+                                <% for(let key in artists_albums) { %>
+                                    <% if(key == artist.full_name) { %>
+                                        <td class="bg-secondary text-white align-middle"><%= artists_albums[key] %></td>
+                                    <% } %>
+                                <% } %>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+                <hr>
+                <hr>
+                <nav class="nav nav-pills row nav-fills">
+                    <a class="col nav-item btn btn-lg btn-info form-btn" href=<%= "/catalog/artist/create" %>>Create Artist</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                <%- include("./partials/nav.ejs") %>
+            </div>
+            <div class="col">
+                <table class="table table-dark table-hover">
+                    <thead>
+                        <h1 class="rounded bg-success text-white border border-primary mt-2 pt-2 pb-2 text-center"><%= title %> Of <%= album.name %></h1>
+                    </thead>
+                    <tbody>
+                        <% if(cover !== undefined) { %>
+                            <tr>
+                                <th scope="row">Album Cover</th>
+                                <td class="bg-info"><img style="height: 200px;" src=<%= "data:image/jpeg;base64,"+cover %>  alt="Album Cover"></td>
+                            </tr>
+                        <% } %>
+                        
+                        <tr>
+                            <th scope="row">Album Name</th>
+                            <td class="bg-info"><%= album.name %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="align-middle">Artist Name</th>
+                            <td class="bg-info"><a style="padding: 0;" class="text-white nav-link" href=<%= album.album_artist_url %>><%= album.artistName %></a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="align-middle">Genre Name</th>
+                            <td class="bg-info">
+                                <% album.album_genre_v2.forEach(genre => { %>
+                                    <span><a style="padding: 0;" class="text-white nav-link" href=<%= "/catalog/genre/"+genre._id %>><%= genre.name %></a></span>
+                                <% }) %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Released Date</th>
+                            <td class="bg-info"><%= album.released_date_format %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Album Description</th>
+                            <td class="bg-info"><%= album.description %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Retail Price</th>
+                            <td class="bg-info"><%= album.price %></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <br>
+                <nav class="nav nav-pills row nav-fills">
+                    <a class="col nav-item btn btn-lg btn-info form-btn m-1" href=<%= album.url+"/update" %>>Update</a>
+                    <a class="col nav-item btn btn-lg btn-danger form-btn m-1" href=<%= album.url+"/delete" %>>Delete</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <div class="container-fluid">
+        <div class="row form-row">
+            <div class="col-sm-3">
+                <%- include("./partials/nav.ejs") %>
+            </div>
+            <div class="col-auto bg-secondary">
+                <h1 class="rounded bg-success text-white border border-primary mt-2 pt-2 pb-2 text-center"><%= title %></h1>
+                <form action="" method="post">
+                    <fieldset class="form-group">
+                        <label for="name">Track Name</label>
+                        <input 
+                            class="form-control"
+                            type="text" id="name" name="name" placeholder="Track Name Goes Here...."
+                            value=<%= track?.name %>
+                        >
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="genre">Genre</label>
+                        <div>
+                            <% genres?.forEach(genre => { %>
+                                <div class="form-check-inline">
+                                    <input 
+                                        class="form-check-input"
+                                        type="checkbox" name="genre" 
+                                        value=<%= genre._id %>
+                                        <%= genre.checked !== undefined ? "checked" : false %> 
+                                    >
+                                    <label 
+                                        class="form-check-label" 
+                                        for=<%= genre._id %>><%= genre.name %></label>
+                                </div>
+                            <% }) %>
+                        </div>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="album">Album</label>
+                        <select 
+                            class="form-control"
+                            name="album" id="album" placeholder="Select Album">
+                            <% albums?.forEach(album => { %>
+                                <option 
+                                    value=<%= album._id %>
+                                    <%= selected= album.selected !== undefined ? "selected" : false %> 
+                                ><%= album.name %></option>
+                            <% }) %>
+                        </select>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="status">Track Status</label>
+                        <select
+                            class="form-control"
+                            name="status" id="status">
+                            <option value="Free">Free</option>
+                            <option value="Preview">Preview</option>
+                            <option value="Play">Play</option>
+                            <option value="Download">Download</option>
+                        </select>
+                    </fieldset>
+                    <% if(update_flag) { %>
+                        <fieldset class="form-group">
+                            <label for="admin">Admin Code</label>
+                            <input class="form-control" type="text" id="admin" name="admin_code" />
+                        </fieldset>
+                    <% } %>
+                    <button class="btn btn -lg btn-block btn-success form-btn" type="submit">Submit</button>
+                </form>
+                <hr>
+                <hr>
+                <h2 class="rounded bg-warning text-dark border border-primary mt-2 pt-2 pb-2 text-center">List Of Errors If There's any: </h4>
+                <hr>
+                <hr>
+                <ul class="list-group list-group-flush">
+                    <% if(errors) { %>
+                        <% errors?.forEach(error => { %>
+                            <li class="alert alert-danger" role="alert"><%= error.msg %> </li>
+                        <% }) %>
+                    <% } else { %>
+                        <li class="list-group-item list-group-item-secondary">There are no Errors</li>
+                    <% } %>
+                </ul>
+                <hr>
+                <hr>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

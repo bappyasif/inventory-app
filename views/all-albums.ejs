@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3">
+                    <%- include("./partials/nav.ejs") %>
+                </div>
+                <div class="col">
+                    <h1 class="rounded bg-secondary text-white border border-primary mt-2 pt-2 pb-2 text-center">
+                        <%= title %>
+                    </h1>
+                    <table class="table table-borderd text-center table-hover table-dark">
+                        <caption>List of all albums</caption>
+                        <thead>
+                            <tr>
+                                <th class="bg-info text-white" scope="col">Album Name</th>
+                                <th class="bg-info text-white" scope="col">Artist Name</th>
+                                <th class="bg-info text-white" scope="col">Album Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% results?.forEach(item=> { %>
+                                <tr>
+                                    <td><a class="btn btn-sm data-item" href=<%= item.url %>><span class="text-white">
+                                                <%= item.name %>
+                                            </span></a></td>
+                                    <td class="bg-secondary text-white"><span>
+                                            <a class="btn btn-sm data-item" href=<%= item.album_artist_url %>><%= item.artistName %></a>
+                                        </span></td>
+                                    <td class="bg-secondary text-white align-middle"><span>
+                                            <%= item.price %>
+                                        </span></td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                    <hr>
+                    <hr>
+                    <nav class="nav nav-pills row nav-fills">
+                        <a class="col nav-item btn btn-lg btn-info form-btn" href=<%= "/catalog/album/create" %>>Create Album</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
